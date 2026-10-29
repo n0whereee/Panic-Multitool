@@ -315,8 +315,6 @@ ScreenCapture = f"{bracketopen}08{bracketclosed} Anti screen capture"
 PasswordGen = f"{bracketopen}09{bracketclosed} Password gen"
 PasswordCheck = f"{bracketopen}10{bracketclosed} Password checker"
 
-"     ╔ ═   ╗     ╚    ╝  ║ "
-
 menu1 = (f"""{Fore.GREEN}
               ╔═════════  {title1}  ═════════╗    ╔════  {title2}  ════╗    ╔═══════  {title3}  ═══════╗
               ║ {Style.RESET_ALL}{lookupIP} {Fore.GREEN}           ║    ║ {Style.RESET_ALL}{FileCorrupt} {Fore.GREEN}      ║    ║ {Style.RESET_ALL}{PasswordGen} {Fore.GREEN}        ║
