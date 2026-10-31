@@ -7,10 +7,10 @@ def IPLookup():
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}IP lookup{Style.RESET_ALL}")
         print("")
-        target_ip = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Ip -> {Style.RESET_ALL}")
+        TargetIp = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Ip -> {Style.RESET_ALL}")
 
         try:
-            response = requests.get(f"http://ip-api.com/json/{target_ip}")
+            response = requests.get(f"http://ip-api.com/json/{TargetIp}")
             api = response.json()
 
             status = "Valid" if api.get('status') == "success" else "Invalid"
