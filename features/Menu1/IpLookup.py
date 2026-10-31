@@ -25,7 +25,6 @@ def IPLookup():
             isp = api.get('isp', "None")
             org = api.get('org', "None")
             as_host = api.get('as', "None")
-
             
             print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searchig for information... {Style.RESET_ALL}")
             time.sleep(1.5)
