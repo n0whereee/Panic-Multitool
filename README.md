@@ -1,7 +1,7 @@
 
 # Panic Multi Tool
 
-An all-in-one toolkit for OSINT, file management, password utilities, and Discord tools.
+An all-in-one toolkit for osint, file management, password utilities, and Discord tools.
 
 ---
 
