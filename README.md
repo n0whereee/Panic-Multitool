@@ -7,23 +7,23 @@ An all-in-one toolkit for OSINT, file management, password utilities, and Discor
 
 ## Features
 
-### [01] OSINT Tools
+### Osint
 - IP Lookup
 - Phone Lookup
 - Metadata Extractor (EXIF)
 - OSINT Framework
 
-### [02] File Management
+### File Management
 - File Corrupter
 - Image Corrupter
 - File Eraser
 - Anti Screen Capture
 
-### [03] Password Tools
+### Password Tools
 - Password Generator
 - Password Checker
 
-### [04] Discord Tools
+### Discord Tools
 - Selfbot Menu
 - Server Cloner
 - Discord Stealer
