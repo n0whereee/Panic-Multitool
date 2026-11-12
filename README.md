@@ -1,81 +1,75 @@
+
 # Panic Multi Tool
 
-A powerful all-in-one OSINT, file, password, and Discord utility toolkit.
+An all-in-one toolkit for OSINT, file management, password utilities, and Discord tools.
 
 ---
 
-## ⚡ Features
+## Features
 
-### 🌍 OSINT Tools
-- 01 IP Lookup
-- 02 Phone Lookup
-- 03 Metadata Extractor (EXIF)
-- 04 OSINT Framework
+### [01] OSINT Tools
+- IP Lookup
+- Phone Lookup
+- Metadata Extractor (EXIF)
+- OSINT Framework
 
+### [02] File Management
+- File Corrupter
+- Image Corrupter
+- File Eraser
+- Anti Screen Capture
 
-### 📁 Files & Control
-- 05 File Corrupter
-- 06 Image Corrupter
-- 07 File Eraser
-- 08 Anti Screen Capture
+### [03] Password Tools
+- Password Generator
+- Password Checker
 
-
-### 🔐 Password Tools
-- 09 Password Generator
-- 10 Password Checker
-
-
-### 💬 Discord Tools
-- 11 Selfbot Menu
-- 12 Server Cloner
-- 13 Discord Stealer
-
+### [04] Discord Tools
+- Selfbot Menu
+- Server Cloner
+- Discord Stealer
 
 ---
 
-## 🧠 Requirements
+## Requirements
 
-Before using the tool, you **MUST** install Python.
+Python must be installed before using this tool.
 
-📌 **Install Python:**
+**Download Python:**
 
 https://www.python.org/downloads/
 
-⚠️ During installation enable:
+During installation, make sure to enable:
 
 - Add Python to PATH
 
 ---
 
-## 📦 Installation
+## Installation
 
-### Option 1
+### Option 1: Automatic Installation
 
 1. Download the project.
-2. Extract the folder.
+2. Extract the archive.
 3. Run:
 
 ```bat
 setup.bat
 ```
 
-This will:
+The setup script will:
+- Check your Python installation.
+- Install the required dependencies.
+- Launch the tool automatically.
 
-- Check your Python installation
-- Install all required dependencies
-- Launch the tool automatically
+### Option 2: Manual Installation
 
----
-
-### Option 2 (Manual)
-
-Install the required packages:
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Then start the tool:
+Start the application:
 
 ```bash
 python main.py
@@ -83,7 +77,7 @@ python main.py
 
 ---
 
-## 📥 Dependencies
+## Dependencies
 
 - colorama
 - requests
@@ -95,23 +89,22 @@ python main.py
 
 ---
 
-## ▶️ Usage
+## Usage
 
-After running `setup.bat`, the tool starts automatically.
-
-Or launch it manually:
+After completing the installation, launch the application using `setup.bat` or run it manually:
 
 ```bash
 python main.py
 ```
----
-
-## ⚠️ Disclaimer
-
-This tool is for educational purposes only.
 
 ---
 
-## 👤 Author
+## Disclaimer
 
-0xN0WHERE
+This project is intended for educational purposes only. The author is not responsible for any misuse of the provided tools.
+
+---
+
+## Author
+
+**n0where**
