@@ -8,15 +8,15 @@ async def LeaveAllGroups(HEADERS):
 
     async with httpx.AsyncClient() as client:
         res = await client.get(
-            f"{BaseURL}/users/@me/channels", headers=HEADERS
+            f"{BaseUrl}/users/@me/channels", headers=HEADERS
         )
 
-        if res.status_code in succesStatus:
-            channels = res.json()
+        if res.status_code in SuccesStatus:
+            Channels = res.json()
 
-            groups = [c for c in channels if c.get("type") == 3]
+            Groups = [c for c in Channels if c.get("type") == 3]
 
-            if not groups:
+            if not Groups:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} No groups found{Style.RESET_ALL}")
                 time.sleep(2)
@@ -29,35 +29,35 @@ async def LeaveAllGroups(HEADERS):
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
                 time.sleep(0.05)
 
-                for channel in channels:
+                for channel in Channels:
                     if channel.get("type") != 3:
                         continue
 
-                    recipients = channel.get("recipients") or []
+                    Recipients = channel.get("recipients") or []
 
-                    if recipients:
-                        names = [u.get("username", "Unknown") for u in recipients]
-                        GroupName = ", ".join(names)
+                    if Recipients:
+                        Names = [u.get("username", "Unknown") for u in Recipients]
+                        GroupName = ", ".join(Names)
                     else:
                         GroupName = "Unknown Group"
 
-                    dm_id = channel["id"]
+                    DmId = channel["id"]
                     try:
-                        delete_res = await client.delete(
-                                f"{BaseURL}/channels/{dm_id}",
+                        DeleteRes = await client.delete(
+                                f"{BaseUrl}/channels/{DmId}",
                                 headers=HEADERS)
                         
-                        if delete_res.status_code in succesStatus:
-                            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Left group            : {Style.RESET_ALL}{GroupName} - {dm_id}")
-                        elif delete_res.status_code == 429:
-                            Retry = delete_res.json().get("retry_after", 5)
+                        if DeleteRes.status_code in SuccesStatus:
+                            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Left group            : {Style.RESET_ALL}{GroupName} - {DmId}")
+                        elif DeleteRes.status_code == 429:
+                            Retry = DeleteRes.json().get("retry_after", 5)
                             await asyncio.sleep(Retry / 1000 if Retry > 1000 else Retry)
                         else:
-                            print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave group : {Style.RESET_ALL}{GroupName} - {dm_id}")
+                            print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave group : {Style.RESET_ALL}{GroupName} - {DmId}")
 
                         await asyncio.sleep(0.2)
                     except Exception:
-                        print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave group : {Style.RESET_ALL}{GroupName} - {dm_id}")
+                        print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave group : {Style.RESET_ALL}{GroupName} - {DmId}")
     
                 time.sleep(0.05)
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
@@ -78,12 +78,12 @@ async def LeaveAllGroups(HEADERS):
         print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
         print("")
 
-        command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-        if command == "1" or command == "01":
+        if Command == "1" or Command == "01":
             pass
-        elif command == "2" or command == "02":
+        elif Command == "2" or Command == "02":
             sys.exit()
         else:
             pass

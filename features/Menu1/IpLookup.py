@@ -2,7 +2,7 @@ from config.settings import *
 
 def IPLookup():
         os.system("cls")
-        Slow(map_banner)
+        Slow(MapBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}IP lookup{Style.RESET_ALL}")
@@ -10,50 +10,50 @@ def IPLookup():
         TargetIp = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Ip -> {Style.RESET_ALL}")
 
         try:
-            response = requests.get(f"http://ip-api.com/json/{TargetIp}")
-            api = response.json()
+            Response = requests.get(f"http://ip-api.com/json/{TargetIp}")
+            Api = Response.json()
 
-            status = "Valid" if api.get('status') == "success" else "Invalid"
-            country = api.get('country', "None")
-            country_code = api.get('countryCode', "None")
-            region = api.get('regionName', "None")
-            zip_code = api.get('zip', "None")
-            city = api.get('city', "None")
-            latitude = api.get('lat', "None")
-            longitude = api.get('lon', "None")
-            timezone = api.get('timezone', "None")
-            isp = api.get('isp', "None")
-            org = api.get('org', "None")
-            as_host = api.get('as', "None")
+            Status = "Valid" if Api.get('status') == "success" else "Invalid"
+            Country = Api.get('country', "None")
+            CountryCode = Api.get('countryCode', "None")
+            Region = Api.get('regionName', "None")
+            ZipCode = Api.get('zip', "None")
+            City = Api.get('city', "None")
+            Latitude = Api.get('lat', "None")
+            Longitude = Api.get('lon', "None")
+            Timezone = Api.get('timezone', "None")
+            Isp = Api.get('isp', "None")
+            Org = Api.get('org', "None")
+            AsHost = Api.get('as', "None")
             
             print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searchig for information... {Style.RESET_ALL}")
             time.sleep(1.5)
             print("")
             print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Status       :{Style.RESET_ALL} {status}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Status       :{Style.RESET_ALL} {Status}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Country      :{Style.RESET_ALL} {country}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Country      :{Style.RESET_ALL} {Country}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Country code :{Style.RESET_ALL} {country_code}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Country code :{Style.RESET_ALL} {CountryCode}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Region       :{Style.RESET_ALL} {region}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Region       :{Style.RESET_ALL} {Region}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Zip          :{Style.RESET_ALL} {zip_code}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Zip          :{Style.RESET_ALL} {ZipCode}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} City         :{Style.RESET_ALL} {city}")#
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} City         :{Style.RESET_ALL} {City}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Latitude     :{Style.RESET_ALL} {latitude}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Latitude     :{Style.RESET_ALL} {Latitude}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Longitude    :{Style.RESET_ALL} {longitude}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Longitude    :{Style.RESET_ALL} {Longitude}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Timezone     :{Style.RESET_ALL} {timezone}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Timezone     :{Style.RESET_ALL} {Timezone}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Isp          :{Style.RESET_ALL} {isp}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Isp          :{Style.RESET_ALL} {Isp}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Org          :{Style.RESET_ALL} {org}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Org          :{Style.RESET_ALL} {Org}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} As host      :{Style.RESET_ALL} {as_host}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} As host      :{Style.RESET_ALL} {AsHost}")
             time.sleep(0.05)
             print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
 
@@ -62,12 +62,12 @@ def IPLookup():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass

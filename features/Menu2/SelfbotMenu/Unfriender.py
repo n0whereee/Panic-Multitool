@@ -8,13 +8,13 @@ async def UnfriendEveryone(HEADERS):
 
     async with httpx.AsyncClient() as client:
         res = await client.get(
-            f"{BaseURL}/users/@me/relationships", headers=HEADERS
+            f"{BaseUrl}/users/@me/relationships", headers=HEADERS
         )
 
-        if res.status_code in succesStatus:
-            friends = res.json()
+        if res.status_code in SuccesStatus:
+            Friends = res.json()
 
-            if not friends:
+            if not Friends:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} No friends found{Style.RESET_ALL}")
                 time.sleep(2)
@@ -28,24 +28,23 @@ async def UnfriendEveryone(HEADERS):
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
                 time.sleep(0.05)
 
-                for friend in friends:
-                    user = friend.get("user", {})
-                    if user:
-                        FriendUser = user.get("username", "Unknown")
+                for friend in Friends:
+                    User = friend.get("user", {})
+                    if User:
+                        FriendUser = User.get("username", "Unknown")
                     else:
                         FriendUser = "Unknown"
 
-                    friend_id = friend["id"]
-
+                    FriendId = friend["id"]
                     try:
-                        delete_res = await client.delete(
-                                f"{BaseURL}/users/@me/relationships/{friend_id}",
+                        DeleteRes = await client.delete(
+                                f"{BaseUrl}/users/@me/relationships/{FriendId}",
                                 headers=HEADERS)
                         
-                        if delete_res.status_code in succesStatus:
+                        if DeleteRes.status_code in SuccesStatus:
                             print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Unfriended         : {Style.RESET_ALL}{FriendUser}")
-                        elif delete_res.status_code == 429:
-                            Retry = delete_res.json().get("retry_after", 5)
+                        elif DeleteRes.status_code == 429:
+                            Retry = DeleteRes.json().get("retry_after", 5)
                             await asyncio.sleep(Retry / 1000 if Retry > 1000 else Retry)
                         else:
                             print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to unfriend : {Style.RESET_ALL}{FriendUser}")
@@ -73,12 +72,12 @@ async def UnfriendEveryone(HEADERS):
         print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
         print("")
 
-        command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-        if command == "1" or command == "01":
+        if Command == "1" or Command == "01":
             pass
-        elif command == "2" or command == "02":
+        elif Command == "2" or Command == "02":
             sys.exit()
         else:
             pass

@@ -8,13 +8,13 @@ async def LeaveAllServers(HEADERS):
 
     async with httpx.AsyncClient() as client:
         res = await client.get(
-            f"{BaseURL}/users/@me/guilds", headers=HEADERS
+            f"{BaseUrl}/users/@me/guilds", headers=HEADERS
         )
 
-        if res.status_code in succesStatus:
-            guilds = res.json()
+        if res.status_code in SuccesStatus:
+            Guilds = res.json()
 
-            if not guilds:
+            if not Guilds:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} No servers found{Style.RESET_ALL}")
                 time.sleep(2)
@@ -27,26 +27,26 @@ async def LeaveAllServers(HEADERS):
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
                 time.sleep(0.05)
 
-                for guild in guilds:
-                    guild_id = guild["id"]
-                    guild_name = guild.get("name", "Unknown Server")
+                for guild in Guilds:
+                    GuildId = guild["id"]
+                    GuildName = guild.get("name", "Unknown Server")
 
                     try:
-                        delete_res = await client.delete(
-                                f"{BaseURL}/users/@me/guilds/{guild_id}",
+                        DeleteRes = await client.delete(
+                                f"{BaseUrl}/users/@me/guilds/{GuildId}",
                                 headers=HEADERS)
                         
-                        if delete_res.status_code in succesStatus:
-                            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Left server            : {Style.RESET_ALL}{guild_name} - {guild_id}")
-                        elif delete_res.status_code == 429:
-                            Retry = delete_res.json().get("retry_after", 5)
+                        if DeleteRes.status_code in SuccesStatus:
+                            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Left server            : {Style.RESET_ALL}{GuildName} - {GuildId}")
+                        elif DeleteRes.status_code == 429:
+                            Retry = DeleteRes.json().get("retry_after", 5)
                             await asyncio.sleep(Retry / 1000 if Retry > 1000 else Retry)
                         else:
-                            print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave server : {Style.RESET_ALL}{guild_name} - {guild_id}")
+                            print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave server : {Style.RESET_ALL}{GuildName} - {GuildId}")
 
                         await asyncio.sleep(0.2)
                     except Exception:
-                        print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave server : {Style.RESET_ALL}{guild_name} - {guild_id}")
+                        print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to leave server : {Style.RESET_ALL}{GuildName} - {GuildId}")
     
                 time.sleep(0.05)
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
@@ -67,12 +67,12 @@ async def LeaveAllServers(HEADERS):
         print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
         print("")
 
-        command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-        if command == "1" or command == "01":
+        if Command == "1" or Command == "01":
             pass
-        elif command == "2" or command == "02":
+        elif Command == "2" or Command == "02":
             sys.exit()
         else:
             pass

@@ -2,18 +2,14 @@ from config.settings import *
 
 def ExtractMetadata():
         os.system("cls")
-        Slow(analyze_banner)
+        Slow(AnalyzeBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}Metadata extractor{Style.RESET_ALL}")
         print("")
-        raw = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Image -> {Style.RESET_ALL}")
+        Raw = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Image -> {Style.RESET_ALL}")
 
-        def clean_path(inp: str) -> str:
-            m = re.match(r'^\s*&?\s*["\']?(.*?)["\']?\s*$', inp)
-            return m.group(1) if m else inp.strip().strip('"').strip("'")
-
-        Image = clean_path(raw)
+        Image = CleanPath(Raw)
 
         if not os.path.isfile(Image):
             print("")
@@ -22,40 +18,40 @@ def ExtractMetadata():
             return
 
         try:
-            img = PIL.Image.open(Image)
+            Img = PIL.Image.open(Image)
 
-            exif_raw = img._getexif()
+            RawExif = Img._getexif()
 
-            if not exif_raw:
+            if not RawExif:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} No metadata found{Style.RESET_ALL}")
                 time.sleep(2)
                 return
 
-            exif = {}
+            Exif = {}
 
-            for k, v in img._getexif().items():
+            for k, v in Img._getexif().items():
                 tag = PIL.ExifTags.TAGS.get(k)
                 if tag:
-                    exif[tag] = v
+                    Exif[tag] = v
 
-            make = exif.get('Make', "None")
-            model = exif.get('Model', "None")
-            software = exif.get('Software', "None")
-            date = exif.get('DateTime', "None")
-            originalDate = exif.get('DateTimeOriginal', "None")
-            gpsInfo = exif.get("GPSInfo")
+            Make = Exif.get('Make', "None")
+            Model = Exif.get('Model', "None")
+            Software = Exif.get('Software', "None")
+            Date = Exif.get('DateTime', "None")
+            OriginalDate = Exif.get('DateTimeOriginal', "None")
+            GpsInfo = Exif.get("GPSInfo")
 
-            if not gpsInfo:            
+            if not GpsInfo:            
                 lat = None
                 long = None
             else:
                 try:
-                    rawLat = gpsInfo[2]
-                    rawLon = gpsInfo[4]
+                    RawLat = GpsInfo[2]
+                    RawLon = GpsInfo[4]
 
-                    lat = rawLat[0]
-                    long = rawLon[0]
+                    lat = RawLat[0]
+                    long = RawLon[0]
                 except Exception:
                     lat = None
                     long = None
@@ -65,16 +61,16 @@ def ExtractMetadata():
             print("")
             print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Make           :{Style.RESET_ALL} {make}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Make           :{Style.RESET_ALL} {Make}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Model          :{Style.RESET_ALL} {model}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Model          :{Style.RESET_ALL} {Model}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Software       :{Style.RESET_ALL} {software}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Software       :{Style.RESET_ALL} {Software}")
             print("")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Recording time :{Style.RESET_ALL} {originalDate}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Recording time :{Style.RESET_ALL} {OriginalDate}")
             time.sleep(0.05)
-            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Last modified  :{Style.RESET_ALL} {date}")
+            print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Last modified  :{Style.RESET_ALL} {Date}")
             print("")
             time.sleep(0.05)
             print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Latitude       :{Style.RESET_ALL} {lat}")
@@ -87,12 +83,12 @@ def ExtractMetadata():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass

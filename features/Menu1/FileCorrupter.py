@@ -1,19 +1,15 @@
 from config.settings import *
 
-def clean_path(inp: str) -> str:
-    m = re.match(r'^\s*&?\s*["\']?(.*?)["\']?\s*$', inp)
-    return m.group(1) if m else inp.strip().strip('"').strip("'")
-
 def CorruptFile():
         os.system("cls")
-        Slow(file_banner)
+        Slow(FileBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}File corrupter{Style.RESET_ALL}")
         print("")
-        raw = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}File -> {Style.RESET_ALL}")
+        Raw = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}File -> {Style.RESET_ALL}")
 
-        FilePath = clean_path(raw)
+        FilePath = CleanPath(Raw)
 
         try:
             if not os.path.isfile(FilePath):
@@ -22,10 +18,10 @@ def CorruptFile():
                 time.sleep(2)
                 return
 
-            random_bytes = os.urandom(1_000_000)
+            RandomBytes = os.urandom(1_000_000)
 
             with open(FilePath, "wb") as f:
-                f.write(random_bytes)
+                f.write(RandomBytes)
 
             print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Corrupting file... {Style.RESET_ALL}")
             time.sleep(1.5)
@@ -41,12 +37,12 @@ def CorruptFile():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass

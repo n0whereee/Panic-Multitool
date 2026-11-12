@@ -2,7 +2,7 @@ from config.settings import *
 
 def OpenOsintFramwork():
         os.system("cls")
-        Slow(osint_banner)
+        Slow(OsintBanner)
         time.sleep(1.5)
         os.system("cls")
 

@@ -1,12 +1,12 @@
 from config.settings import *
 
-async def CloneRoles(targetId, cloneId, headers):
-    roles = requests.get(f"{BaseURL}/guilds/{targetId}/roles", headers=headers)
-    DelRoles = requests.get(f"{BaseURL}/guilds/{cloneId}/roles", headers=headers)
+async def CloneRoles(TargetId, CloneId, headers):
+    roles = requests.get(f"{BaseUrl}/guilds/{TargetId}/roles", headers=headers)
+    DelRoles = requests.get(f"{BaseUrl}/guilds/{CloneId}/roles", headers=headers)
 
     DelRolesData = DelRoles.json()
 
-    if roles.status_code in succesStatus:
+    if roles.status_code in SuccesStatus:
         for DelRole in DelRolesData:
             DelRoleName = DelRole["name"]
             DelRoleID = DelRole["id"]
@@ -15,11 +15,11 @@ async def CloneRoles(targetId, cloneId, headers):
                 continue
             
             rDel = requests.delete(
-                f"{BaseURL}/guilds/{cloneId}/roles/{DelRoleID}",
+                f"{BaseUrl}/guilds/{CloneId}/roles/{DelRoleID}",
                 headers=headers
             )
 
-            if rDel.status_code in succesStatus:
+            if rDel.status_code in SuccesStatus:
                 print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Deleted role              : {Style.RESET_ALL}{DelRoleName} - {DelRoleID}")
             elif rDel.status_code == 429:
                 Retry = r.json().get("retry_after", 5)
@@ -29,15 +29,15 @@ async def CloneRoles(targetId, cloneId, headers):
                 
             time.sleep(0.2)
 
-        rolesData = roles.json()
-        roleMap = {}
-        roleMap[targetId] = cloneId
+        RolesData = roles.json()
+        RoleMap = {}
+        RoleMap[TargetId] = CloneId
 
-        for role in rolesData:
+        for role in RolesData:
             RoleName = role["name"]
             RoleID = role["id"]
 
-            payload = {
+            Payload = {
                 "name": role["name"],
                 "permissions": role["permissions"],
                 "color": role["color"]
@@ -47,15 +47,15 @@ async def CloneRoles(targetId, cloneId, headers):
                 continue
 
             r = requests.post(
-                f"{BaseURL}/guilds/{cloneId}/roles",
+                f"{BaseUrl}/guilds/{CloneId}/roles",
                 headers=headers,
-                json=payload
+                json=Payload
             )
 
-            if r.status_code in succesStatus:
+            if r.status_code in SuccesStatus:
                 print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Cloned role               : {Style.RESET_ALL}{RoleName} - {RoleID}")
                 try:
-                    roleMap[role["id"]] = r.json()["id"]
+                    RoleMap[role["id"]] = r.json()["id"]
                 except Exception:
                     pass
 
@@ -70,4 +70,4 @@ async def CloneRoles(targetId, cloneId, headers):
     else:
         print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Roles unavailable{Style.RESET_ALL}")
 
-    return roleMap
+    return RoleMap

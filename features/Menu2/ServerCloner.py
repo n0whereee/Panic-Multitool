@@ -5,7 +5,7 @@ from features.Menu2.CloneFunctions.NameEditor import *
 
 def CloneServer():
         os.system("cls")
-        Slow(discord_banner)
+        Slow(DiscordBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}Server cloner{Style.RESET_ALL}")
@@ -16,51 +16,52 @@ def CloneServer():
         time.sleep(0.05)
         print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
         print("")
-        token = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Token -> {Style.RESET_ALL}")
-        headers = {
-            "Authorization": token
-        }
-
-        r = requests.get("https://discord.com/api/v10/users/@me", headers=headers)
-
-        if r.status_code in succesStatus:
-            DcToken = token
-        else:
-            print("")
-            print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid token{Style.RESET_ALL}")
-            time.sleep(2)
-            return
-
-        TargetID = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}ID to clone server -> {Style.RESET_ALL}")
-        CloneID = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}ID to apply clone -> {Style.RESET_ALL}")
-        
-        headers = {
-            "Authorization": DcToken,
-            "Content-Type": "application/json"
-        }
-        
-        TargetRes  = requests.get(f"{BaseURL}/guilds/{TargetID}", headers=headers)
-        CloneRes  = requests.get(f"{BaseURL}/guilds/{CloneID}", headers=headers)
-
-        if TargetRes.status_code not in succesStatus:
-            print("")
-            print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid clone ID{Style.RESET_ALL}")
-            time.sleep(2)
-            return
-        
-        if CloneRes.status_code not in succesStatus:
-            print("")
-            print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid apply ID{Style.RESET_ALL}")
-            time.sleep(2)
-            return
-        
-        if TargetID == CloneID:
-            print("")
-            print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Apply and target ID cant be the same{Style.RESET_ALL}")
-            time.sleep(2)
-            return
+        RawToken = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Token -> {Style.RESET_ALL}")
 
         try:
+            headers = {
+                "Authorization": RawToken
+            }
+
+            r = requests.get("https://discord.com/api/v10/users/@me", headers=headers)
+
+            if r.status_code in SuccesStatus:
+                Token = RawToken
+            else:
+                print("")
+                print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid token{Style.RESET_ALL}")
+                time.sleep(2)
+                return
+
+            TargetID = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}ID to clone server -> {Style.RESET_ALL}")
+            CloneID = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}ID to apply clone -> {Style.RESET_ALL}")
+            
+            headers = {
+                "Authorization": Token,
+                "Content-Type": "application/json"
+            }
+            
+            TargetRes  = requests.get(f"{BaseUrl}/guilds/{TargetID}", headers=headers)
+            CloneRes  = requests.get(f"{BaseUrl}/guilds/{CloneID}", headers=headers)
+
+            if TargetRes.status_code not in SuccesStatus:
+                print("")
+                print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid clone ID{Style.RESET_ALL}")
+                time.sleep(2)
+                return
+            
+            if CloneRes.status_code not in SuccesStatus:
+                print("")
+                print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid apply ID{Style.RESET_ALL}")
+                time.sleep(2)
+                return
+            
+            if TargetID == CloneID:
+                print("")
+                print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Apply and target ID cant be the same{Style.RESET_ALL}")
+                time.sleep(2)
+                return
+
             print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Cloning server... {Style.RESET_ALL}")
             time.sleep(1.5)
 
@@ -78,12 +79,12 @@ def CloneServer():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass

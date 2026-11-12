@@ -13,56 +13,56 @@ from features.Menu2.ServerCloner import *
 from features.Menu2.StealerConfig import *
 
 #Menu 2
-def mainMenu2():
+def MainMenu2():
     while True:
         os.system("cls")
-        Slow(banner)
+        Slow(Banner)
         print("")
-        Slow(menu2)
+        Slow(Menu2)
         
-        command2 = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
         
-        if command2 == "11":
+        if Command == "11":
             RunMenu()
-        elif command2 == "12":
+        elif Command == "12":
             CloneServer()
-        elif command2 == "13":
+        elif Command == "13":
             ConfigStealer()
-        elif command2 == "+":
-            main()
+        elif Command == "+":
+            Main()
 
 #Menu 1
-def main():
+def Main():
     while True:
         os.system("cls")
-        Slow(banner)
+        Slow(Banner)
         print("")
-        Slow(menu1)
+        Slow(Menu)
         
-        command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
                 
-        if command == "1" or command == "01":
+        if Command == "1" or Command == "01":
             IPLookup()
-        elif command == "2" or command == "02":
+        elif Command == "2" or Command == "02":
             LookupPhone()
-        elif command == "3" or command == "03":
+        elif Command == "3" or Command == "03":
             ExtractMetadata()
-        elif command == "4" or command == "04":
+        elif Command == "4" or Command == "04":
             OpenOsintFramwork()
-        elif command == "5" or command == "05":
+        elif Command == "5" or Command == "05":
             CorruptFile()
-        elif command == "6" or command == "06":
+        elif Command == "6" or Command == "06":
             CorruptImage()
-        elif command == "7" or command == "07":
+        elif Command == "7" or Command == "07":
             EraseFile()
-        elif command == "8" or command == "08":
+        elif Command == "8" or Command == "08":
             AntiCapture()
-        elif command == "9" or command == "09":
+        elif Command == "9" or Command == "09":
             GeneratePassword()
-        elif command == "10":
+        elif Command == "10":
             CheckPassword()
-        elif command == "+":
-            mainMenu2()
-main()
+        elif Command == "+":
+            MainMenu2()
+Main()

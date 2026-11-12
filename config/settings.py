@@ -30,6 +30,7 @@ import httpx
 import asyncio
 import subprocess
 import shutil
+from selenium import webdriver
 
 init(convert=True)
 
@@ -42,22 +43,22 @@ bracketclosed2 = f"{Fore.WHITE}]{Style.RESET_ALL}"
 Next = f"{bracketopen}+{bracketclosed} Next"
 Back = f"{bracketopen}+{bracketclosed} Back"
 
-response = requests.get("https://api.ipify.org")
-public_ip = response.text
+Response = requests.get("https://api.ipify.org")
+PublicIp = Response.text
 
-system_version = platform.platform()
+SystemVersion = platform.platform()
 
-pc_name = platform.node()
-username = os.getlogin()
+PcName = platform.node()
+Username = os.getlogin()
 
-is_windows = os.name == "nt"
-system_text = "Windows" if is_windows else "Linux"
+IsWindows = os.name == "nt"
+System = "Windows" if IsWindows else "Linux"
 
-BaseURL = "https://discord.com/api/v9"
+BaseUrl = "https://discord.com/api/v9"
 
-succesStatus = [200, 204, 201]
+SuccesStatus = [200, 204, 201]
 
-discord_banner = (f"""{Fore.GREEN}
+DiscordBanner = (f"""{Fore.GREEN}
                                               @@@@                @%@@                                      
                                        @@@@@@@@@@@@               @@@@@@@@@@%                               
                                   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                          
@@ -85,7 +86,7 @@ discord_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}                                     
 """)
 
-lookup_banner = (f"""{Fore.GREEN}
+LookupBanner = (f"""{Fore.GREEN}
 
                                           ...:----:...                                              
                                      .:=#@@@@@@@@@@@@@@%*-..                                        
@@ -117,7 +118,7 @@ lookup_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-map_banner = (f"""{Fore.GREEN}
+MapBanner = (f"""{Fore.GREEN}
                                       :**+ :::+*@@.                                                         
                               +: @ = =.  :#@@@@@@@@                 :     .=*@@#     -                      
                  @@@@-. :=: +@@.:% *=@@:   @@@@@@          :#=::     .:@=@@@@@@@@@@@@@@@@@@@@--.-:          
@@ -147,7 +148,7 @@ map_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-analyze_banner = (f"""{Fore.GREEN}
+AnalyzeBanner = (f"""{Fore.GREEN}
                                                             >@@|                                                
                                                             >@@|                                                
                                                             >@@|                                                
@@ -174,7 +175,7 @@ analyze_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-osint_banner = (f"""{Fore.GREEN}
+OsintBanner = (f"""{Fore.GREEN}
                                           ...:----:...                                              
                                      .:=#@@@@@@@@@@@@@@%*-..                                        
                                   .:#@@@@@@@%#*****#%@@@@@@@+..                                     
@@ -205,7 +206,7 @@ osint_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-file_banner = (f"""{Fore.GREEN}
+FileBanner = (f"""{Fore.GREEN}
                                                        j@@@@@^                                 
                            _@v   p@@@@j           j@@@@@@@@@@@@@@@;          |@@@@M   v@)      
                           @@@@@) >@@@@    v@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@p    @@@@_ _@@@@@     
@@ -230,7 +231,7 @@ file_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-password_banner = (f"""{Fore.GREEN}
+PasswordBanner = (f"""{Fore.GREEN}
                                          ^M@@@@@@@@@v                                    
                                       v@@@@@@@@@@@@@@@@@                                 
                                     _@@@@@@@)    ;a@@@@@@@                               
@@ -255,7 +256,7 @@ password_banner = (f"""{Fore.GREEN}
 {Style.RESET_ALL}
 """)
 
-Selfbot_banner = (f"""{Fore.GREEN}
+SelfbotBanner = (f"""{Fore.GREEN}
 ███████╗███████╗██╗     ███████╗██████╗  ██████╗ ████████╗
 ██╔════╝██╔════╝██║     ██╔════╝██╔══██╗██╔═══██╗╚══██╔══╝
 ███████╗█████╗  ██║     █████╗  ██████╔╝██║   ██║   ██║   
@@ -264,19 +265,19 @@ Selfbot_banner = (f"""{Fore.GREEN}
 ╚══════╝╚══════╝╚══════╝╚═╝     ╚═════╝  ╚═════╝    ╚═╝{Style.RESET_ALL}                     
 """)
 
-banner = (f"""{Fore.GREEN}
+Banner = (f"""{Fore.GREEN}
                         ██████╗  █████╗ ███╗   ██╗██╗ ██████╗    ████████╗ ██████╗  ██████╗ ██╗     
                         ██╔══██╗██╔══██╗████╗  ██║██║██╔════╝    ╚══██╔══╝██╔═══██╗██╔═══██╗██║     
                         ██████╔╝███████║██╔██╗ ██║██║██║            ██║   ██║   ██║██║   ██║██║     
                         ██╔═══╝ ██╔══██║██║╚██╗██║██║██║            ██║   ██║   ██║██║   ██║██║     
                         ██║     ██║  ██║██║ ╚████║██║╚██████╗       ██║   ╚██████╔╝╚██████╔╝███████╗
                         ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
-                                                             ~ https://github.com/0xN0WHERE
+                                                             ~ https://github.com/n0whereee
 {Style.RESET_ALL}                            
 """)
 
 #Selfbot features
-unfriend = f"{bracketopen}01{bracketclosed} Unfriend everyone"
+Unfriend = f"{bracketopen}01{bracketclosed} Unfriend everyone"
 DmEveryone = f"{bracketopen}02{bracketclosed} Message all open dms"
 CloseDms = f"{bracketopen}03{bracketclosed} Close all dms"
 LeaveGroups = f"{bracketopen}04{bracketclosed} Leave all groups"
@@ -285,7 +286,7 @@ Nuke = f"{bracketopen}06{bracketclosed} Nuke token"
 MainMenu = f"{bracketopen}07{bracketclosed} Main menu"
 
 SelfbotMenu = f"""
-{Fore.GREEN}{Style.RESET_ALL}{unfriend} {Fore.GREEN}
+{Fore.GREEN}{Style.RESET_ALL}{Unfriend} {Fore.GREEN}
 {Style.RESET_ALL}{DmEveryone} {Fore.GREEN}
 {Style.RESET_ALL}{CloseDms} {Fore.GREEN}
 {Style.RESET_ALL}{LeaveGroups} {Fore.GREEN}
@@ -294,14 +295,14 @@ SelfbotMenu = f"""
 {Style.RESET_ALL}{MainMenu} {Fore.GREEN}
 {Style.RESET_ALL}"""
 
-#Menu1
-title1 = "Osint"
-title2 = "Files & Control"
-title3 = "Passwords"
+#Menu 1
+OsintTitle = "Osint"
+FilesTitle = "Files & Control"
+PasswordsTitle = "Passwords"
 
 #Osint
-lookupIP = f"{bracketopen}01{bracketclosed} Ip lookup"
-lookupPhone = f"{bracketopen}02{bracketclosed} Phone lookup"
+LookupIp = f"{bracketopen}01{bracketclosed} Ip lookup"
+PhoneLookup = f"{bracketopen}02{bracketclosed} Phone lookup"
 ExifExtractor = f"{bracketopen}03{bracketclosed} Metadata extractor"
 OsintFrameworkWeb = f"{bracketopen}04{bracketclosed} Osint framework"
 
@@ -315,10 +316,10 @@ ScreenCapture = f"{bracketopen}08{bracketclosed} Anti screen capture"
 PasswordGen = f"{bracketopen}09{bracketclosed} Password gen"
 PasswordCheck = f"{bracketopen}10{bracketclosed} Password checker"
 
-menu1 = (f"""{Fore.GREEN}
-              ╔═════════  {title1}  ═════════╗    ╔════  {title2}  ════╗    ╔═══════  {title3}  ═══════╗
-              ║ {Style.RESET_ALL}{lookupIP} {Fore.GREEN}           ║    ║ {Style.RESET_ALL}{FileCorrupt} {Fore.GREEN}      ║    ║ {Style.RESET_ALL}{PasswordGen} {Fore.GREEN}        ║
-              ║ {Style.RESET_ALL}{lookupPhone} {Fore.GREEN}        ║    ║ {Style.RESET_ALL}{ImageCorrupt} {Fore.GREEN}     ║    ║ {Style.RESET_ALL}{PasswordCheck} {Fore.GREEN}    ║
+Menu = (f"""{Fore.GREEN}
+              ╔═════════  {OsintTitle}  ═════════╗    ╔════  {FilesTitle}  ════╗    ╔═══════  {PasswordsTitle}  ═══════╗
+              ║ {Style.RESET_ALL}{LookupIp} {Fore.GREEN}           ║    ║ {Style.RESET_ALL}{FileCorrupt} {Fore.GREEN}      ║    ║ {Style.RESET_ALL}{PasswordGen} {Fore.GREEN}        ║
+              ║ {Style.RESET_ALL}{PhoneLookup} {Fore.GREEN}        ║    ║ {Style.RESET_ALL}{ImageCorrupt} {Fore.GREEN}     ║    ║ {Style.RESET_ALL}{PasswordCheck} {Fore.GREEN}    ║
               ║ {Style.RESET_ALL}{ExifExtractor} {Fore.GREEN}  ║    ║ {Style.RESET_ALL}{FileErase} {Fore.GREEN}         ║    ║                           ║
               ║ {Style.RESET_ALL}{OsintFrameworkWeb} {Fore.GREEN}     ║    ║ {Style.RESET_ALL}{ScreenCapture} {Fore.GREEN} ║    ║                           ║
               ║                           ║    ║                           ║    ║                           ║
@@ -327,18 +328,16 @@ menu1 = (f"""{Fore.GREEN}
                                                                                                             ╚═ {Style.RESET_ALL}{Next}{Fore.GREEN}      
 {Style.RESET_ALL}""")
 
-#Menu2
-Menu2Title1 = "Discord"
-Menu2Title2 = "Files & Control"
-Menu2Title3 = "Passwords"
+#Menu 2
+DiscordTitle = "Discord"
 
 #Discord
 Selfbot = f"{bracketopen}11{bracketclosed} Selfbot menu"
 DiscordCloner = f"{bracketopen}12{bracketclosed} Server cloner"
 DiscordStealer = f"{bracketopen}13{bracketclosed} Discord stealer"
 
-menu2 = (f"""{Fore.GREEN}
-                                               ╔════════  {Menu2Title1}  ════════╗
+Menu2 = (f"""{Fore.GREEN}
+                                               ╔════════  {DiscordTitle}  ════════╗
                                                ║ {Style.RESET_ALL}{Selfbot} {Fore.GREEN}        ║
                                                ║ {Style.RESET_ALL}{DiscordCloner} {Fore.GREEN}       ║
                                                ║ {Style.RESET_ALL}{DiscordStealer} {Fore.GREEN}     ║
@@ -348,6 +347,10 @@ menu2 = (f"""{Fore.GREEN}
                                                ║═══════════════════════════╝
                                      {Style.RESET_ALL}{Back}{Fore.GREEN} ═╝
 {Style.RESET_ALL}""")
+
+def CleanPath(inp: str) -> str:
+    m = re.match(r'^\s*&?\s*["\']?(.*?)["\']?\s*$', inp)
+    return m.group(1) if m else inp.strip().strip('"').strip("'")
 
 def MyToken():
     LOCAL = os.getenv("LOCALAPPDATA")

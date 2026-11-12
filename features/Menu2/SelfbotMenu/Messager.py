@@ -10,13 +10,13 @@ async def MessageEveryone(HEADERS):
 
     async with httpx.AsyncClient() as client:
         res = await client.get(
-            f"{BaseURL}/users/@me/channels", headers=HEADERS
+            f"{BaseUrl}/users/@me/channels", headers=HEADERS
         )
 
-        if res.status_code in succesStatus:
-            channels = res.json()
+        if res.status_code in SuccesStatus:
+            Channels = res.json()
 
-            if not channels:
+            if not Channels:
                 print("")
                 print(f"{bracketopen}{Fore.WHITE}!{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} No open dms found{Style.RESET_ALL}")
                 time.sleep(2)
@@ -30,27 +30,26 @@ async def MessageEveryone(HEADERS):
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
                 time.sleep(0.05)
 
-                for channel in channels:
-                    recipients = channel.get("recipients", [])
+                for channel in Channels:
+                    Recipients = channel.get("recipients", [])
 
-                    if recipients:
-                        DmUser = recipients[0].get("username", "Unknown")
+                    if Recipients:
+                        DmUser = Recipients[0].get("username", "Unknown")
                     else:
                         DmUser = "Unknown"
 
-                    dm_id = channel["id"]
-
+                    DmId = channel["id"]
                     try:
-                        post_res = await client.post(
-                            f"{BaseURL}/channels/{dm_id}/messages",
+                        PostRes = await client.post(
+                            f"{BaseUrl}/channels/{DmId}/messages",
                             headers=HEADERS,
                             json={"content": Message}
                         )
 
-                        if post_res.status_code in succesStatus:
+                        if PostRes.status_code in SuccesStatus:
                             print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Messaged          : {Style.RESET_ALL}{DmUser}")
-                        elif post_res.status_code == 429:
-                            Retry = post_res.json().get("retry_after", 5)
+                        elif PostRes.status_code == 429:
+                            Retry = PostRes.json().get("retry_after", 5)
                             await asyncio.sleep(Retry / 1000 if Retry > 1000 else Retry)
                         else:
                             print(f"{bracketopen2}{Fore.GREEN}!{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Failed to message : {Style.RESET_ALL}{DmUser}")
@@ -78,12 +77,12 @@ async def MessageEveryone(HEADERS):
         print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
         print("")
 
-        command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+        Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-        if command == "1" or command == "01":
+        if Command == "1" or Command == "01":
             pass
-        elif command == "2" or command == "02":
+        elif Command == "2" or Command == "02":
             sys.exit()
         else:
             pass

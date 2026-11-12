@@ -1,18 +1,18 @@
 from config.settings import *
 
-async def CloneChannels(targetId, cloneId, headers, rolemap):
-    channels = requests.get(f"{BaseURL}/guilds/{targetId}/channels", headers=headers)
-    DelChannels = requests.get(f"{BaseURL}/guilds/{cloneId}/channels", headers=headers)
+async def CloneChannels(TargetId, CloneId, headers, Rolemap):
+    Channels = requests.get(f"{BaseUrl}/guilds/{TargetId}/channels", headers=headers)
+    DelChannels = requests.get(f"{BaseUrl}/guilds/{CloneId}/channels", headers=headers)
 
     DelChannelData = DelChannels.json()
 
-    if channels.status_code in succesStatus:
+    if Channels.status_code in SuccesStatus:
         for DelChannel in DelChannelData:
             DelChannelName = DelChannel["name"]
             DelChannelID = DelChannel["id"]
             
             rDel = requests.delete(
-                f"{BaseURL}/channels/{DelChannelID}",
+                f"{BaseUrl}/channels/{DelChannelID}",
                 headers=headers
             )
 
@@ -32,10 +32,10 @@ async def CloneChannels(targetId, cloneId, headers, rolemap):
 
             time.sleep(0.2)
 
-        channelData = channels.json()
-        categoryMap = {}
+        ChannelData = Channels.json()
+        CategoryMap = {}
 
-        for channel in channelData:
+        for channel in ChannelData:
             ChannelName = channel["name"]
             ChannelID = channel["id"]
 
@@ -43,13 +43,14 @@ async def CloneChannels(targetId, cloneId, headers, rolemap):
                 Overwrites = []
                 for overwrite in channel.get("permission_overwrites", []):
                     OldID = overwrite["id"]
-                    if overwrite["type"] == 0 and OldID in rolemap:
-                        overwrite["id"] = rolemap[OldID]
+
+                    if overwrite["type"] == 0 and OldID in Rolemap:
+                        overwrite["id"] = Rolemap[OldID]
                         Overwrites.append(overwrite)
                     elif overwrite["type"] == 1:
                         Overwrites.append(overwrite)
 
-                payload = {
+                Payload = {
                     "name": channel["name"],
                     "type": channel["type"],
                     "position": channel["position"],
@@ -57,16 +58,16 @@ async def CloneChannels(targetId, cloneId, headers, rolemap):
                 }
 
                 r = requests.post(
-                    f"{BaseURL}/guilds/{cloneId}/channels",
+                    f"{BaseUrl}/guilds/{CloneId}/channels",
                     headers=headers,
-                    json=payload
+                    json=Payload
                 )
 
-                if r.status_code in succesStatus:
+                if r.status_code in SuccesStatus:
                     print(f"{bracketopen2}{Fore.GREEN}+{Style.RESET_ALL}{bracketclosed2}{Fore.GREEN} Cloned category           : {Style.RESET_ALL}{ChannelName} - {ChannelID}")
                     try:
                         ResData = r.json()
-                        categoryMap[ChannelID] = ResData["id"]
+                        CategoryMap[ChannelID] = ResData["id"]
                     except Exception:
                         pass
 
@@ -75,13 +76,15 @@ async def CloneChannels(targetId, cloneId, headers, rolemap):
 
                 time.sleep(0.2)
 
-        for channel in channelData:
+        for channel in ChannelData:
             if channel["type"] != 4: 
                 Overwrites = []
+
                 for overwrite in channel.get("permission_overwrites", []):
                     OldID = overwrite["id"]
-                    if overwrite["type"] == 0 and OldID in rolemap:
-                        overwrite["id"] = rolemap[OldID]
+
+                    if overwrite["type"] == 0 and OldID in Rolemap:
+                        overwrite["id"] = Rolemap[OldID]
                         Overwrites.append(overwrite)
                     elif overwrite["type"] == 1:
                         Overwrites.append(overwrite)
@@ -94,16 +97,16 @@ async def CloneChannels(targetId, cloneId, headers, rolemap):
                 }
 
                 oldCatID = channel.get("parent_id")
-                if oldCatID and oldCatID in categoryMap:
-                    payload["parent_id"] = categoryMap[oldCatID]
+                if oldCatID and oldCatID in CategoryMap:
+                    payload["parent_id"] = CategoryMap[oldCatID]
 
                 r = requests.post(
-                    f"{BaseURL}/guilds/{cloneId}/channels",
+                    f"{BaseUrl}/guilds/{CloneId}/channels",
                     headers=headers,
                     json=payload
                 )
 
-                if r.status_code in succesStatus:
+                if r.status_code in SuccesStatus:
                     ClonedChannelData = r.json()
                     ClonedID = ClonedChannelData.get("id")
                     ClonedName = ClonedChannelData.get("name")

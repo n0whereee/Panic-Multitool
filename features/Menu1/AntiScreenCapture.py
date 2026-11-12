@@ -3,7 +3,7 @@ from config.settings import *
 AntiThread = None
 AntiHwnd = None
 
-def run():
+def Run():
     global AntiHwnd
 
     ClassName = "Window"
@@ -59,7 +59,7 @@ def AntiCapture():
         global AntiThread
 
         os.system("cls")
-        Slow(analyze_banner)
+        Slow(AnalyzeBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}Anti screen capture{Style.RESET_ALL}")
@@ -69,7 +69,7 @@ def AntiCapture():
                 StopAntiCapture()
                 AntiThread.join(timeout=2)
 
-            AntiThread = threading.Thread(target=run, daemon=True)
+            AntiThread = threading.Thread(target=Run, daemon=True)
             AntiThread.start()
 
             print("")
@@ -80,12 +80,12 @@ def AntiCapture():
             print(f"{bracketopen}{Fore.WHITE}02{Style.RESET_ALL}{bracketclosed}{Fore.GREEN} Exit{Style.RESET_ALL}")
             print("")
 
-            command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{username}{Fore.GREEN})─[{Fore.WHITE}~/{system_text}/{pc_name}{Fore.GREEN}]
+            Command = input(f"""{Fore.GREEN} ┌──({Fore.WHITE}{Username}{Fore.GREEN})─[{Fore.WHITE}~/{System}/{PcName}{Fore.GREEN}]
  └─{Fore.WHITE}$ {Style.RESET_ALL}""")
 
-            if command == "1" or command == "01":
+            if Command == "1" or Command == "01":
                 pass
-            elif command == "2" or command == "02":
+            elif Command == "2" or Command == "02":
                 sys.exit()
             else:
                 pass
