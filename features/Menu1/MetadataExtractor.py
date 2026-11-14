@@ -56,7 +56,7 @@ def ExtractMetadata():
                     lat = None
                     long = None
 
-            print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searchig for information... {Style.RESET_ALL}")
+            print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searching for metadata... {Style.RESET_ALL}")
             time.sleep(1.5)
             print("")
             print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
