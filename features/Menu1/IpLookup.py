@@ -26,7 +26,7 @@ def IPLookup():
             Org = Api.get('org', "None")
             AsHost = Api.get('as', "None")
             
-            print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searchig for information... {Style.RESET_ALL}")
+            print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searching for information... {Style.RESET_ALL}")
             time.sleep(1.5)
             print("")
             print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
