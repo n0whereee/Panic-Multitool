@@ -30,7 +30,6 @@ import httpx
 import asyncio
 import subprocess
 import shutil
-from selenium import webdriver
 
 init(convert=True)
 
@@ -42,11 +41,6 @@ bracketclosed2 = f"{Fore.WHITE}]{Style.RESET_ALL}"
 
 Next = f"{bracketopen}+{bracketclosed} Next"
 Back = f"{bracketopen}+{bracketclosed} Back"
-
-Response = requests.get("https://api.ipify.org")
-PublicIp = Response.text
-
-SystemVersion = platform.platform()
 
 PcName = platform.node()
 Username = os.getlogin()
