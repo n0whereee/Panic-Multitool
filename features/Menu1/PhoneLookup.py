@@ -2,7 +2,7 @@ from config.settings import *
 
 def LookupPhone():
         os.system("cls")
-        Slow(LookupBanner)
+        Slow(OsintBanner)
         time.sleep(1.5)
         os.system("cls")
         print(f"{bracketopen}!{bracketclosed} {Fore.GREEN}Phone number lookup{Style.RESET_ALL}")
