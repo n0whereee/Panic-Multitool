@@ -49,7 +49,7 @@ def LookupPhone():
                 Location = geocoder.description_for_number(PhoneNumber, 'en')
                 Provider = carrier.name_for_number(PhoneNumber, 'en')
 
-                print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searchig for information... {Style.RESET_ALL}")
+                print(f"{bracketopen}~{bracketclosed} {Fore.GREEN}Searching for information... {Style.RESET_ALL}")
                 print("")
                 time.sleep(1.5)
                 print("────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────")
